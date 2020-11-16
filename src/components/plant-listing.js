@@ -3,6 +3,7 @@ import LoadingSpinner from "./loading-spinner";
 import ErrorMessage from "./error-message";
 import { plantsCollection } from "../data/firebase";
 import Plant from "./plant";
+import "./plant-listing.css";
 
 function PlantListing() {
   const [plants, setPlants] = useState([]);

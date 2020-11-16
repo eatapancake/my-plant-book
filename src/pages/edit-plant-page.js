@@ -1,14 +1,15 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EditPlant from "../components/edit-plant";
 function AddMoviePage() {
+  const { id } = useParams();
   return (
     <main>
       <Helmet>
-        <title>Edit</title>
+        <title className="main__title">Edit</title>
       </Helmet>
-      <EditPlant />
+      <EditPlant id={id} />
     </main>
   );
 }

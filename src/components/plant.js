@@ -3,13 +3,13 @@ import { Delete, Edit } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import ErrorMessage from "./error-message";
 import { plantsCollection } from "../data/firebase";
-// import "./plant.css";
+import "./plant.css";
 
 function Plant(props) {
   const { id, data } = props;
   const { name, type, sunlight, water, season } = data;
 
-  const waterString = "💧".repeat(water) + "◻".repeat(3 - water);
+  const waterString = "💧".repeat(water) + " ▪ ".repeat(3 - water);
   const seasonList = () => (
     <div>
       <ul>
@@ -53,7 +53,7 @@ function Plant(props) {
         <div className="plant__sunlight">
           Amount of sunlight: {sunlight} hours
         </div>
-        <div className="plant__water">Amount of water:{waterString}</div>
+        <div className="plant__water">Amount of water: {waterString}</div>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </div>
       <div>

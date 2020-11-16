@@ -1,12 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import PlantListing from "../components/plant-listing";
+import "./pages.css";
 
 function PlantPage() {
   return (
     <main>
       <Helmet>
-        <title>Plants</title>
+        <title className="main__title">Plants</title>
       </Helmet>
       <PlantListing />
     </main>
