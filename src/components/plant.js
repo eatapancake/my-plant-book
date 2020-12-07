@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Delete, Edit } from "@material-ui/icons";
 import { useHistory } from "react-router-dom";
 import ErrorMessage from "./error-message";
-import { plantsCollection } from "../data/firebase";
+import { usersCollection } from "../data/firebase";
 import "./plant.css";
 
 function Plant(props) {
-  const { id, data } = props;
+  const { id, data, userId } = props;
   const { name, type, sunlight, water, season } = data;
 
   const waterString = "💧".repeat(water) + " ▪ ".repeat(3 - water);
@@ -26,7 +26,7 @@ function Plant(props) {
     setIsDeleting(true);
     setErrorMessage("");
     try {
-      const docRef = plantsCollection.doc(id);
+      const docRef = usersCollection.doc(userId).collection("plants").doc(id);
       await docRef.delete();
     } catch (error) {
       console.error(error);

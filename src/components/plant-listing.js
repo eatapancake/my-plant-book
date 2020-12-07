@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import LoadingSpinner from "./loading-spinner";
 import ErrorMessage from "./error-message";
 import { plantsCollection } from "../data/firebase";
 import Plant from "./plant";
+import useAllPlants from "../hooks/use-all-plants";
 import "./plant-listing.css";
 
-function PlantListing() {
-  const [plants, setPlants] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  useEffect(() => {
-    console.log("Fetching");
+function PlantListing(props) {
+  const userId = props.user.uid;
 
-    setIsLoading(true);
-    const onNext = (snapshot) => {
-      setIsLoading(false);
-      const docs = snapshot.docs;
-      setPlants(docs);
-    };
-    const onError = (error) => {
-      setErrorMessage(
-        "There was a problem loading your page. Please try again..."
-      );
-      console.error(error);
-    };
-    const unsubscribe = plantsCollection
-      .orderBy("name")
-      .onSnapshot(onNext, onError);
-    return unsubscribe;
-  }, []);
+  const [plants, isLoading, errorMessage] = useAllPlants(userId);
   return (
     <div className="plants-container">
       <h1>Plants</h1>
@@ -49,7 +30,7 @@ function PlantListing() {
 
           return (
             <li key={plantID}>
-              <Plant id={plantID} data={plantData} />
+              <Plant id={plantID} data={plantData} userId={userId} />
             </li>
           );
         })}

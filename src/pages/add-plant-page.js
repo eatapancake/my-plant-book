@@ -2,13 +2,13 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import AddPlant from "../components/add-plant";
 
-function AddMoviePage() {
+function AddMoviePage(props) {
   return (
     <main>
       <Helmet>
         <title>Add</title>
       </Helmet>
-      <AddPlant />
+      <AddPlant {...props} />
     </main>
   );
 }

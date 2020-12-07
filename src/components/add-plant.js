@@ -1,33 +1,17 @@
-import React, { useState } from "react";
-import { plantsCollection } from "../data/firebase";
+import React from "react";
+
+import useSavePlant from "../hooks/use-save-plant";
 // import "./add-plant.css";
 import PlantForm from "./plant-form";
 
-function AddPlant() {
-  const [isSaving, setIsSaving] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
+function AddPlant(props) {
+  const userId = props.user.uid;
+  const [savePlant, isSaving, formMessage] = useSavePlant();
 
-  const onPlantSubmit = async (name, type, sunlight = {}, water, season) => {
-    // alert(`You want to add ${title} ${rating} ${releaseYear}`);
-
-    setIsSaving(true);
-    setFormMessage("");
-    try {
-      await plantsCollection.add({
-        name,
-        type,
-        sunlight,
-        water,
-        season,
-      });
-      console.log("Saved");
-    } catch (error) {
-      setFormMessage("Something went wrong. Please try again");
-      console.error(error);
-    }
-
-    setIsSaving(false);
+  const onPlantSubmit = async (name, type, sunlight, water, season = {}) => {
+    savePlant({ name, type, sunlight, water, season }, userId);
   };
+  // alert(`You want to add ${title} ${rating} ${releaseYear}`);
 
   return (
     <div className="add-container">
