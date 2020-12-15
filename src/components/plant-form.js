@@ -10,7 +10,8 @@ function PlantForm(props) {
   if (initialState.type === undefined) initialState.type = "Unknown";
   if (initialState.sunlight === undefined) initialState.sunlight = 0;
   if (initialState.water === undefined) initialState.water = 1;
-  if (initialState.season === undefined) initialState.season = "Unknown";
+  // if (initialState.season[0] === undefined) initialState.season[0] = "Winter";
+  // if (initialState.season[1] === undefined) initialState.season[1] = "Winter";
 
   //   const [title, setTitle] = useState("");
   //   const [rating, setRating] = useState(null);
@@ -20,7 +21,8 @@ function PlantForm(props) {
   const [type, setType] = useState(initialState.type);
   const [sunlight, setSunlight] = useState(initialState.sunlight);
   const [water, setWater] = useState(initialState.water);
-  const [season, setSeason] = useState([initialState.season]);
+  const [season = {}, setSeason = {}] = useState([]);
+  // const [season2, setSeason2] = useState([initialState.season[1]]);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -47,10 +49,10 @@ function PlantForm(props) {
     else setWater(value);
   };
   const onSeasonChange = (event) => {
-    setSeason([0].concat(event.target.value));
+    setSeason(season.concat(event.target.value));
   };
   const onSeasonChange2 = (event) => {
-    setSeason([1].concat(event.target.value));
+    setSeason(season.concat(event.target.value));
   };
 
   const onPlantSubmit = async (event) => {
@@ -73,19 +75,20 @@ function PlantForm(props) {
         />
         {/* //------- */}
         <label className="plant-form__label"> 1. Season: </label>
-        <select value={season[0]} onChange={onSeasonChange}>
-          <option>Spring</option>
-          <option>Summer</option>
-          <option>Fall</option>
-          <option>Winter</option>
+        <select onChange={onSeasonChange}>
+          <option value="N/A">N/A</option>
+          <option value="Spring">Spring</option>
+          <option value="Summer">Summer</option>
+          <option value="Fall">Fall</option>
+          <option value="Winter">Winter</option>
         </select>
         <label className="plant-form__label">2. Season: </label>
-        <select value={season[1]} onChange={onSeasonChange2}>
-          <option>Spring</option>
-          <option>Summer</option>
-          <option>Fall</option>
-          <option>Winter</option>
-          <option>N/A</option>
+        <select onChange={onSeasonChange2}>
+          <option value="N/A">N/A</option>
+          <option value="Spring">Spring</option>
+          <option value="Summer">Summer</option>
+          <option value="Fall">Fall</option>
+          <option value="Winter">Winter</option>
         </select>
         <label className="plant-form__label">Type: </label>
         <input

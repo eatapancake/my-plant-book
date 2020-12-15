@@ -1,0 +1,8 @@
+.login-form {
+  padding: 1.5rem;
+  padding-top: 0.01rem;
+  background-color: #fff;
+  color: #151116;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}

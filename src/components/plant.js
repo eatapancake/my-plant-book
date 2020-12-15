@@ -7,7 +7,7 @@ import "./plant.css";
 
 function Plant(props) {
   const { id, data, userId } = props;
-  const { name, type, sunlight, water, season } = data;
+  const { name, type, sunlight, water, season = {} } = data;
 
   const waterString = "💧".repeat(water) + " ▪ ".repeat(3 - water);
   const seasonList = () => (
@@ -50,8 +50,9 @@ function Plant(props) {
             })}
           </ul>
         </div>
+
         <div className="plant__sunlight">
-          Amount of sunlight: {sunlight} hours
+          Amount of sunlight: {sunlight} hrs
         </div>
         <div className="plant__water">Amount of water: {waterString}</div>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

@@ -1,56 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { plantsCollection } from "../data/firebase";
+import usePlant from "../hooks/use-plants";
+import useSavePlant from "../hooks/use-save-plant";
 import "./edit-plant.css";
 import ErrorMessage from "./error-message";
 import LoadingSpinner from "./loading-spinner";
 import PlantForm from "./plant-form";
 
 function EditPlant(props) {
-  const { id } = props;
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [plantData, setPlantData] = useState(null);
-  const [isSaving, setIsSaving] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
+  const plantId = props.id;
+  const userId = props.user.uid;
 
-  useEffect(() => {
-    async function getPlant() {
-      setIsLoading(true);
-      try {
-        const plantSnapshot = await plantsCollection.doc(id).get();
-
-        if (!plantSnapshot.exists) {
-          throw new Error("no such movie exists! >:O ");
-        }
-
-        const data = plantSnapshot.data();
-        setPlantData(data);
-      } catch (error) {
-        setErrorMessage("Something went wrong! PLease try again D:");
-        console.error(error);
-      }
-      setIsLoading(false);
-    }
-    getPlant();
-  }, [id]);
+  const [plantData, isLoading, errorMessage] = usePlant(userId, plantId);
+  const [savePlant, isSaving, formMessage] = useSavePlant();
 
   const onPlantSubmit = async (name, type, sunlight, water, season = {}) => {
-    setIsSaving(true);
-    setFormMessage("");
-    try {
-      await plantsCollection.doc(id).set({
-        name,
-        type,
-
-        sunlight,
-        water,
-        season,
-      });
-      setFormMessage("Saved Successfully!! ^ ^");
-    } catch (error) {
-      setFormMessage("Something went wrong >_<");
-    }
-    setIsSaving(false);
+    savePlant({ name, type, sunlight, water, season }, userId, plantId);
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ErrorMessage from "./error-message";
 import { provider, auth } from "../data/firebase";
-// import "./account-info.css";
+import "./account-info.css";
 
 function AccountInfo(props) {
   const { user } = props;
@@ -48,7 +48,7 @@ function AccountInfo(props) {
   } else {
     contents = (
       <>
-        <p>
+        <p className="account-paragraph">
           You can log in or create an account by linking your Google Account.
           Follow the instructions in the pop up window.{" "}
         </p>

@@ -21,7 +21,7 @@ function useSavePlant() {
 
       console.log("Saved");
     } catch (error) {
-      setFormMessage("Something went wrong. Please try again");
+      setFormMessage("Something went wrong. Please try againnnnn");
       console.error(error);
     }
 
