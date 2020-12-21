@@ -31,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Nav uqser={user} />
+      <Nav user={user} />
 
       <Switch>
         <Route path="/account">
