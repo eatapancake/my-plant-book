@@ -7,3 +7,6 @@ My motivation for this app stems from my recent hobby I picked up during quarant
 Currently, on the app the user can create their own account, make a plant, delete a plant, and update an existing plant. I tried implementing a filter option, however, it failed to work. So that still needs some work to be done. 
 
 ### App Running
+
+![App_Running](https://user-images.githubusercontent.com/44815979/102796172-7d743580-4373-11eb-8ce6-5449c5b7265b.png)
+
